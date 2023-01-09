@@ -1,109 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Sistem Tempahan Kenderaan Jabatan ILPS</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-<!--===============================================================================================-->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <?php
-      include "conn.php";
-
-      if(isset($_POST['submit']))
-      {
-        
-      $name = $_POST['name'];
-      $username = $_POST['username'];
-      $password = md5($_POST['password']);
-
-      $sql= "INSERT INTO `user`(`username`, `password`, `name`) VALUES ('{$username}','{$password}','{$name}')";
-      $rs= mysqli_query($conn, $sql); 
-
-      //displaying proper message for the user to see whether the query executed perfectly  or not 
-      if (!$rs) {
-        echo "something went wrong ". mysqli_error($conn);
-      }
-
-      else { echo "<script type='text/javascript'>alert('User added sucessfully!')</script>";
-            echo "<script type='text/javascript'> document.location ='index.php'; </script>";
-          }
+  include "config.php";
+  //masukkan maklumat database
+  if (isset($_POST['submit'])){
+  $id= $_POST['id'];
+  $username= $_POST['username'];
+  $password= md5 ($_POST['password']);
+    //echo $nokp."". $no_telefon."". $id_staf."";
+    $sql = "INSERT INTO user (id,username,password) VALUES ('{$id}','{$username}','{$password}')";
+    $rs=mysqli_query($link, $sql);
+    //displaying proper message fot the user to see wheteher the query excuted perfectly or not
+    if (!$rs){
+      echo "Something went wrong ". mysqli_error($link);
     }
-  ?>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-				<form class="login100-form validate-form flex-sb flex-w" method="post" action="">
-					<span class="login100-form-title p-b-53">
-						Register
-					</span>
+    else { echo "<script type'text/javascript'>alert('User added successfully!')</script>";
+           echo "<script type'text/javascript'> document.location = 'index.php'; </script>";
+    }
+  }
+  ?> 
+<!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('image/programmer.png');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
 
-					<div class="p-t-31 p-b-9">
-						<span class="txt1">
-							Name
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Name is required">
-						<input class="input100" type="text" name="name" placeholder="Name" required>
-						<span class="focus-input100"></span>
-					</div>
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
 
-                    
-					<div class="p-t-31 p-b-9">
-						<span class="txt1">
-							Username
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username" required>
-						<span class="focus-input100"></span>
-					</div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">SIGN UP HERE</h2>
+          <form method="post">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" id="form3Example1" class="form-control" placeholder="Id User" name="id"/>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" id="form3Example2" class="form-control" placeholder="Username" name="username"/>
+                </div>
+              </div>
+            </div>
 
-                    
-					<div class="p-t-13 p-b-9">
-						<span class="txt1">
-							Password
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" required>
-						<span class="focus-input100"></span>
-					</div>
+            <!-- Password input -->
+            <div class="form-outline mb-4">              
+              <input type="password" id="form3Example4" class="form-control" placeholder="Password" name="password"/>
+            </div>
 
-					<div class="container-login100-form-btn m-t-17">
-						<button type="submit" value="submit" class="login100-form-btn" name="submit">
-							Register
-						 </button> 
-					</div>
-
-					<div class="w-full text-center p-t-55">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4" name="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
 </body>
 </html>
+
